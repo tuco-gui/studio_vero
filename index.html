@@ -5,11 +5,21 @@
     <title>A Studio Vero agradece seu cadastro!</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     
-    <!-- Estilos originais mantidos -->
+    <!-- Mantendo os estilos originais -->
     <style>
         body { text-align: center; background-color: #b30000; color: white; font-family: Arial, sans-serif; }
         .container { margin-top: 50px; }
-        .button { display: inline-block; padding: 15px 20px; background: #25D366; color: white; font-size: 18px; text-decoration: none; border-radius: 5px; }
+        .button {
+            display: inline-block;
+            padding: 15px 20px;
+            background: #25D366;
+            color: white;
+            font-size: 18px;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background 0.3s;
+        }
+        .button:hover { background: #1eb154; }
         .footer { margin-top: 30px; font-size: 12px; }
     </style>
 </head>
@@ -33,7 +43,7 @@
         // Garantir que o código só rode na página de obrigado
         if (window.location.pathname.includes("/obrigado")) {
 
-            // Função para gerar número de protocolo aleatório
+            // Função para gerar número de protocolo aleatório (4 a 5 dígitos)
             function gerarProtocolo() {
                 return Math.floor(10000 + Math.random() * 90000); // Número entre 10000 e 99999
             }
@@ -50,38 +60,45 @@
                 };
             }
 
-            // Atualizar o botão de WhatsApp após a página carregar
+            // Função principal que será chamada ao carregar a página
+            function atualizarBotaoWhatsApp() {
+                var numeroWhatsApp = "5511916792333"; // Seu número do WhatsApp
+                var protocolo = gerarProtocolo();
+                var utms = getUTMParams();
+
+                // Criar mensagem personalizada com protocolo e UTMs
+                var mensagem = `Você será transferido para atendimento. Guarde este número de protocolo, pois será necessário informá-lo para continuar com seu suporte.\n\n📌 *PROTOCOLO:* ${protocolo}\n\n*Atenção:* Não apague esta mensagem para garantir um atendimento mais rápido!`;
+
+                // Criar o link do WhatsApp com UTMs
+                var linkWhatsApp = `https://wa.me/${numeroWhatsApp}?text=${encodeURIComponent(mensagem)}` +
+                                   `&utm_source=${utms.utm_source}&utm_medium=${utms.utm_medium}&utm_campaign=${utms.utm_campaign}&utm_term=${utms.utm_term}&utm_content=${utms.utm_content}`;
+
+                // Atualizar o botão de WhatsApp com o link correto
+                var botaoWhatsApp = document.getElementById("whatsapp-button");
+                if (botaoWhatsApp) {
+                    botaoWhatsApp.setAttribute("href", linkWhatsApp);
+                    botaoWhatsApp.dataset.whatsappLink = linkWhatsApp; // Armazena o link para evitar reprocessamento
+
+                    console.log("✅ Botão do WhatsApp atualizado:", linkWhatsApp);
+                    console.log("📌 Protocolo gerado:", protocolo);
+                    console.log("🔗 UTMs capturadas:", utms);
+                } else {
+                    console.error("❌ Nenhum botão do WhatsApp foi encontrado!");
+                }
+            }
+
+            // Esperar a página carregar antes de modificar o botão
             window.addEventListener("load", function () {
-                setTimeout(function () {
-                    var numeroWhatsApp = "5511916792333"; // Seu número do WhatsApp
-                    var protocolo = gerarProtocolo();
-                    var utms = getUTMParams();
-
-                    // Criar mensagem personalizada com protocolo e UTMs
-                    var mensagem = `Você será transferido para atendimento. Guarde este número de protocolo, pois será necessário informá-lo para continuar com seu suporte.\n\n📌 *PROTOCOLO:* ${protocolo}\n\n*Atenção:* Não apague esta mensagem para garantir um atendimento mais rápido!`;
-
-                    // Criar o link do WhatsApp com UTMs
-                    var linkWhatsApp = `https://wa.me/${numeroWhatsApp}?text=${encodeURIComponent(mensagem)}` +
-                                       `&utm_source=${utms.utm_source}&utm_medium=${utms.utm_medium}&utm_campaign=${utms.utm_campaign}&utm_term=${utms.utm_term}&utm_content=${utms.utm_content}`;
-
-                    // Atualizar o botão de WhatsApp
-                    var botaoWhatsApp = document.getElementById("whatsapp-button");
-                    if (botaoWhatsApp) {
-                        botaoWhatsApp.setAttribute("href", linkWhatsApp);
-                        console.log("✅ Botão do WhatsApp atualizado:", linkWhatsApp);
-                        console.log("📌 Protocolo gerado:", protocolo);
-                        console.log("🔗 UTMs capturadas:", utms);
-                    } else {
-                        console.error("❌ Nenhum botão do WhatsApp foi encontrado!");
-                    }
-
-                }, 500); // Reduzi o tempo para evitar atrasos
+                setTimeout(atualizarBotaoWhatsApp, 500); // Reduzindo tempo de espera para evitar atrasos
             });
 
-            // Prevenir que a página recarregue ou duplique ao clicar no botão
+            // Impedir que a página seja duplicada ao clicar no botão
             document.getElementById("whatsapp-button").addEventListener("click", function (event) {
-                event.preventDefault(); // Previne comportamento padrão
-                window.open(this.href, "_blank"); // Abre em nova aba
+                event.preventDefault(); // Evita comportamento padrão
+                var link = this.dataset.whatsappLink; // Obtém o link atualizado do WhatsApp
+                if (link) {
+                    window.open(link, "_blank"); // Abre WhatsApp em nova aba
+                }
             });
         }
     </script>
