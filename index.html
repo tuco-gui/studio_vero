@@ -1,93 +1,80 @@
 <!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
-  <head>
+<head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-    <title>Obrigado!</title>
+    <title>A Studio Vero agradece seu cadastro!</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="lp-version" content="v6.24.180" />
-    <link rel="stylesheet" href="https://fonts.ub-assets.com/css?family=Poppins:500,700,900,regular,300" />
-  </head>
+    <style>
+        body { text-align: center; background-color: #b30000; color: white; font-family: Arial, sans-serif; }
+        .container { margin-top: 50px; }
+        .button { display: inline-block; padding: 15px 20px; background: #25D366; color: white; font-size: 18px; text-decoration: none; border-radius: 5px; }
+        .footer { margin-top: 30px; font-size: 12px; }
+    </style>
+</head>
+<body>
 
-  <body>
-    <div class="lp-pom-root">
-      <div class="lp-positioned-content">
-        <div class="lp-element lp-pom-text" id="lp-pom-text-25">
-          <h1 style="text-align: center;">
-            <span style="font-family: Poppins; font-size: 72px; color: rgb(255, 255, 255);"><strong>A Studio Vero agradece seu cadastro!</strong></span>
-          </h1>
-        </div>
+    <div class="container">
+        <h1>A Studio Vero agradece seu cadastro!</h1>
+        <p>Se preferir, você pode entrar em contato conosco agora mesmo pelo WhatsApp! Basta clicar no botão abaixo.</p>
 
-        <div class="lp-element lp-pom-text" id="lp-pom-text-354">
-          <h1 style="text-align: center;">
-            <span style="font-family: Poppins; font-size: 22px; color: rgb(255, 255, 255);">
-              Se preferir, você pode entrar em contato conosco agora mesmo pelo WhatsApp! Basta clicar no botão abaixo.
-            </span>
-          </h1>
-        </div>
-
-        <!-- Botão do WhatsApp -->
-        <a class="lp-element lp-pom-button" id="lp-pom-button-665" href="#" target="_self">
-          <span class="label"><strong>Fale com nossa equipe pelo Whatsapp</strong></span>
+        <!-- BOTÃO DO WHATSAPP -->
+        <a id="whatsapp-button" class="button" href="#" target="_blank">
+            Fale com nossa equipe pelo WhatsApp
         </a>
-
-        <div class="lp-element lp-pom-text" id="lp-pom-text-661">
-          <h3 style="text-align: center;">
-            <span style="font-family: Poppins; font-size: 12px; color: rgb(255, 255, 255);">Todos os direitos reservados 2024 ©</span>
-          </h3>
-        </div>
-      </div>
     </div>
 
-    <!-- ✅ SCRIPT JAVASCRIPT ADICIONADO -->
+    <div class="footer">Todos os direitos reservados 2024 © Desenvolvido por V4 França & Co</div>
+
     <script>
-      // Garantir que o código só rode na página de obrigado
-      if (window.location.pathname.includes("/obrigado")) {
-          
-          // Função para gerar número de protocolo aleatório
-          function gerarProtocolo() {
-              return Math.floor(10000 + Math.random() * 90000); // Número entre 10000 e 99999
-          }
+        // Garantir que o código só rode na página de obrigado
+        if (window.location.pathname.includes("/obrigado")) {
+            
+            // Função para gerar número de protocolo aleatório
+            function gerarProtocolo() {
+                return Math.floor(10000 + Math.random() * 90000); // Número entre 10000 e 99999
+            }
 
-          // Função para capturar UTMs da URL
-          function getUTMParams() {
-              let params = new URLSearchParams(window.location.search);
-              return {
-                  utm_source: params.get("utm_source") || "desconhecido",
-                  utm_medium: params.get("utm_medium") || "desconhecido",
-                  utm_campaign: params.get("utm_campaign") || "desconhecido",
-                  utm_term: params.get("utm_term") || "",
-                  utm_content: params.get("utm_content") || ""
-              };
-          }
+            // Função para capturar UTMs da URL
+            function getUTMParams() {
+                let params = new URLSearchParams(window.location.search);
+                return {
+                    utm_source: params.get("utm_source") || "desconhecido",
+                    utm_medium: params.get("utm_medium") || "desconhecido",
+                    utm_campaign: params.get("utm_campaign") || "desconhecido",
+                    utm_term: params.get("utm_term") || "",
+                    utm_content: params.get("utm_content") || ""
+                };
+            }
 
-          // Esperar a página carregar totalmente antes de modificar o botão
-          window.addEventListener("load", function () {
-              setTimeout(function () {
-                  var numeroWhatsApp = "5511916792333"; // Seu número do WhatsApp
-                  var protocolo = gerarProtocolo();
-                  var utms = getUTMParams();
+            // Esperar a página carregar antes de modificar o botão
+            window.addEventListener("load", function () {
+                setTimeout(function () {
+                    var numeroWhatsApp = "5511916792333"; // Seu número do WhatsApp
+                    var protocolo = gerarProtocolo();
+                    var utms = getUTMParams();
 
-                  // Criar mensagem personalizada com protocolo e UTMs
-                  var mensagem = `Você será transferido para atendimento. Guarde este número de protocolo, pois será necessário informá-lo para continuar com seu suporte.\n\n📌 *PROTOCOLO:* ${protocolo}\n\n*Atenção:* Não apague esta mensagem para garantir um atendimento mais rápido!`;
+                    // Criar mensagem personalizada com protocolo e UTMs
+                    var mensagem = `Você será transferido para atendimento. Guarde este número de protocolo, pois será necessário informá-lo para continuar com seu suporte.\n\n📌 *PROTOCOLO:* ${protocolo}\n\n*Atenção:* Não apague esta mensagem para garantir um atendimento mais rápido!`;
 
-                  // Criar o link do WhatsApp com UTMs
-                  var linkWhatsApp = `https://wa.me/${numeroWhatsApp}?text=${encodeURIComponent(mensagem)}` +
-                                     `&utm_source=${utms.utm_source}&utm_medium=${utms.utm_medium}&utm_campaign=${utms.utm_campaign}&utm_term=${utms.utm_term}&utm_content=${utms.utm_content}`;
+                    // Criar o link do WhatsApp com UTMs
+                    var linkWhatsApp = `https://wa.me/${numeroWhatsApp}?text=${encodeURIComponent(mensagem)}` +
+                                       `&utm_source=${utms.utm_source}&utm_medium=${utms.utm_medium}&utm_campaign=${utms.utm_campaign}&utm_term=${utms.utm_term}&utm_content=${utms.utm_content}`;
 
-                  // Atualizar o botão de WhatsApp na página
-                  var botaoWhatsApp = document.querySelector("#lp-pom-button-665");
-                  if (botaoWhatsApp) {
-                      botaoWhatsApp.setAttribute("href", linkWhatsApp);
-                      console.log("✅ Botão do WhatsApp atualizado:", linkWhatsApp);
-                  } else {
-                      console.error("❌ Nenhum botão do WhatsApp foi encontrado!");
-                  }
+                    // Atualizar o botão de WhatsApp na página
+                    var botaoWhatsApp = document.getElementById("whatsapp-button");
+                    if (botaoWhatsApp) {
+                        botaoWhatsApp.setAttribute("href", linkWhatsApp);
+                        console.log("✅ Botão do WhatsApp atualizado:", linkWhatsApp);
+                        console.log("📌 Protocolo gerado:", protocolo);
+                        console.log("🔗 UTMs capturadas:", utms);
+                    } else {
+                        console.error("❌ Nenhum botão do WhatsApp foi encontrado!");
+                    }
 
-              }, 1500); // Tempo de espera para garantir que a página carregou
-          });
-      }
+                }, 1500); // Tempo de espera para garantir que a página carregou
+            });
+        }
     </script>
 
-  </body>
+</body>
 </html>
