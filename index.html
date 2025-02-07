@@ -1,9 +1,11 @@
 <!DOCTYPE html>
-<html xmlns="http://www.w3.org/1999/xhtml">
+<html xmlns="http://www.w3.org/1999/xhtml" class="wf-poppins-n9-active wf-poppins-n4-active wf-poppins-n5-active wf-poppins-n7-active wf-poppins-n3-active wf-active">
 <head>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
     <title>A Studio Vero agradece seu cadastro!</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    
+    <!-- Estilos originais mantidos -->
     <style>
         body { text-align: center; background-color: #b30000; color: white; font-family: Arial, sans-serif; }
         .container { margin-top: 50px; }
@@ -11,6 +13,7 @@
         .footer { margin-top: 30px; font-size: 12px; }
     </style>
 </head>
+
 <body>
 
     <div class="container">
@@ -25,10 +28,11 @@
 
     <div class="footer">Todos os direitos reservados 2024 © Desenvolvido por V4 França & Co</div>
 
+    <!-- Código JavaScript corrigido -->
     <script>
         // Garantir que o código só rode na página de obrigado
         if (window.location.pathname.includes("/obrigado")) {
-            
+
             // Função para gerar número de protocolo aleatório
             function gerarProtocolo() {
                 return Math.floor(10000 + Math.random() * 90000); // Número entre 10000 e 99999
@@ -46,7 +50,7 @@
                 };
             }
 
-            // Esperar a página carregar antes de modificar o botão
+            // Atualizar o botão de WhatsApp após a página carregar
             window.addEventListener("load", function () {
                 setTimeout(function () {
                     var numeroWhatsApp = "5511916792333"; // Seu número do WhatsApp
@@ -60,7 +64,7 @@
                     var linkWhatsApp = `https://wa.me/${numeroWhatsApp}?text=${encodeURIComponent(mensagem)}` +
                                        `&utm_source=${utms.utm_source}&utm_medium=${utms.utm_medium}&utm_campaign=${utms.utm_campaign}&utm_term=${utms.utm_term}&utm_content=${utms.utm_content}`;
 
-                    // Atualizar o botão de WhatsApp na página
+                    // Atualizar o botão de WhatsApp
                     var botaoWhatsApp = document.getElementById("whatsapp-button");
                     if (botaoWhatsApp) {
                         botaoWhatsApp.setAttribute("href", linkWhatsApp);
@@ -71,7 +75,13 @@
                         console.error("❌ Nenhum botão do WhatsApp foi encontrado!");
                     }
 
-                }, 1500); // Tempo de espera para garantir que a página carregou
+                }, 500); // Reduzi o tempo para evitar atrasos
+            });
+
+            // Prevenir que a página recarregue ou duplique ao clicar no botão
+            document.getElementById("whatsapp-button").addEventListener("click", function (event) {
+                event.preventDefault(); // Previne comportamento padrão
+                window.open(this.href, "_blank"); // Abre em nova aba
             });
         }
     </script>
