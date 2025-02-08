@@ -1,80 +1,114 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Studio Vero - Obrigado!</title>
+    <title>Página de Obrigado</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700;900&display=swap" rel="stylesheet">
     <style>
-        body {
-            background: linear-gradient(#c80d0d, #890101);
-            color: white;
-            font-family: Poppins, sans-serif;
-            text-align: center;
+        * {
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
+            font-family: 'Poppins', sans-serif;
+            text-align: center;
         }
+
+        body {
+            background: linear-gradient(to bottom, #c80d0d, #890101);
+            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            padding: 20px;
+        }
+
         .container {
             max-width: 800px;
-            margin: 50px auto;
+            text-align: center;
         }
+
+        .logo {
+            max-width: 200px;
+            margin-bottom: 20px;
+        }
+
         h1 {
-            font-size: 48px;
-            font-weight: bold;
+            font-size: 36px;
+            font-weight: 700;
         }
+
         p {
             font-size: 18px;
+            font-weight: 400;
+            margin: 15px 0;
         }
-        .btn-whatsapp {
+
+        .button {
             display: inline-block;
-            background: #15d918;
+            background: #16a034;
             color: white;
-            font-size: 20px;
-            font-weight: bold;
-            padding: 15px 30px;
-            border-radius: 5px;
+            padding: 15px 20px;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
             text-decoration: none;
             margin-top: 20px;
             transition: 0.3s;
         }
-        .btn-whatsapp:hover {
-            background: #13b915;
+
+        .button:hover {
+            background: #13a832;
         }
+
         .footer {
-            margin-top: 30px;
             font-size: 14px;
+            margin-top: 30px;
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 28px;
+            }
+            p {
+                font-size: 16px;
+            }
+            .button {
+                padding: 12px 18px;
+                font-size: 14px;
+            }
         }
     </style>
 </head>
 <body>
     <div class="container">
+        <img src="https://upload.wikimedia.org/wikipedia/commons/8/8d/Studio_logo.jpg" alt="Studio Vero Logo" class="logo">
         <h1>A Studio Vero agradece seu cadastro!</h1>
-        <p>Se preferir, você pode entrar em contato conosco agora mesmo pelo WhatsApp! Basta clicar no botão abaixo.</p>
-        <a href="#" id="whatsapp-button" class="btn-whatsapp">Fale com nossa equipe pelo WhatsApp</a>
+        <p>Se preferir, você pode entrar em contato conosco agora mesmo pelo WhatsApp!<br>Basta clicar no botão abaixo.<br>Nossa equipe estará pronta para te atender!</p>
+        <a href="#" id="whatsappButton" class="button">Fale com nossa equipe pelo WhatsApp</a>
         <p class="footer">Todos os direitos reservados 2024 © Desenvolvido por V4 França & Co</p>
     </div>
-
+    
     <script>
-        document.addEventListener("DOMContentLoaded", function() {
-            function gerarProtocolo() {
-                return Math.floor(10000 + Math.random() * 90000);
-            }
-            function getUTMParams() {
-                let params = new URLSearchParams(window.location.search);
-                return {
-                    utm_source: params.get("utm_source") || "desconhecido",
-                    utm_medium: params.get("utm_medium") || "desconhecido",
-                    utm_campaign: params.get("utm_campaign") || "desconhecido",
-                    utm_term: params.get("utm_term") || "",
-                    utm_content: params.get("utm_content") || ""
-                };
-            }
+        window.addEventListener("load", function () {
+            var numeroWhatsApp = "5511916792333";
+            var protocolo = Math.floor(10000 + Math.random() * 90000);
+            var params = new URLSearchParams(window.location.search);
+            var utms = {
+                utm_source: params.get("utm_source") || "desconhecido",
+                utm_medium: params.get("utm_medium") || "desconhecido",
+                utm_campaign: params.get("utm_campaign") || "desconhecido",
+                utm_term: params.get("utm_term") || "",
+                utm_content: params.get("utm_content") || ""
+            };
 
-            let numeroWhatsApp = "5511916792333";
-            let protocolo = gerarProtocolo();
-            let utms = getUTMParams();
-            let mensagem = `Você será transferido para atendimento.\n\n📌 *PROTOCOLO:* ${protocolo}\n\n*Atenção:* Não apague esta mensagem para garantir um atendimento mais rápido!`;
-            let linkWhatsApp = `https://wa.me/${numeroWhatsApp}?text=${encodeURIComponent(mensagem)}&utm_source=${utms.utm_source}&utm_medium=${utms.utm_medium}&utm_campaign=${utms.utm_campaign}&utm_term=${utms.utm_term}&utm_content=${utms.utm_content}`;
-            document.getElementById("whatsapp-button").setAttribute("href", linkWhatsApp);
+            var mensagem = `Você será transferido para atendimento. Guarde este número de protocolo, pois será necessário informá-lo para continuar com seu suporte.\n\n📌 *PROTOCOLO:* ${protocolo}\n\n*Atenção:* Não apague esta mensagem para garantir um atendimento mais rápido!`;
+            var linkWhatsApp = `https://wa.me/${numeroWhatsApp}?text=${encodeURIComponent(mensagem)}` + `&utm_source=${utms.utm_source}&utm_medium=${utms.utm_medium}&utm_campaign=${utms.utm_campaign}&utm_term=${utms.utm_term}&utm_content=${utms.utm_content}`;
+            
+            document.getElementById("whatsappButton").setAttribute("href", linkWhatsApp);
+            console.log("✅ Botão do WhatsApp atualizado com sucesso:", linkWhatsApp);
         });
     </script>
 </body>
